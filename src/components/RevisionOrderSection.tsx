@@ -314,7 +314,7 @@ export const RevisionOrderSection = () => {
           </Button>
 
           <p className="text-xs leading-6 text-muted-foreground">
-            Designed for final days before SEE. Watermark format: {{STUDENT_NAME}} · {{STUDENT_NUMBER}}
+            Designed for final days before SEE. Watermark format: {"{{STUDENT_NAME}} · {{STUDENT_NUMBER}}"}
           </p>
         </form>
 
