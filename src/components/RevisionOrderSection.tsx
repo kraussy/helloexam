@@ -361,7 +361,7 @@ export const RevisionOrderSection = () => {
           <div className="mt-5 rounded-[1.5rem] border border-dashed border-border bg-card p-5">
             <p className="text-sm font-semibold text-foreground">Watermarked PDF template</p>
             <p className="mt-2 text-sm leading-7 text-muted-foreground">
-              Each generated file includes a visible watermark with <strong>{{STUDENT_NAME}}</strong> and <strong>{{STUDENT_NUMBER}}</strong>, then downloads directly from the site.
+              Each generated file includes a visible watermark with <strong>{"{{STUDENT_NAME}}"}</strong> and <strong>{"{{STUDENT_NUMBER}}"}</strong>, then downloads directly from the site.
             </p>
           </div>
         </div>
