@@ -14,16 +14,145 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      order_payments: {
+        Row: {
+          amount_npr: number
+          created_at: string
+          id: string
+          method: Database["public"]["Enums"]["payment_method"]
+          order_id: string
+          payment_note: string | null
+          status: Database["public"]["Enums"]["payment_status"]
+          transaction_reference: string | null
+          updated_at: string
+        }
+        Insert: {
+          amount_npr?: number
+          created_at?: string
+          id?: string
+          method?: Database["public"]["Enums"]["payment_method"]
+          order_id: string
+          payment_note?: string | null
+          status?: Database["public"]["Enums"]["payment_status"]
+          transaction_reference?: string | null
+          updated_at?: string
+        }
+        Update: {
+          amount_npr?: number
+          created_at?: string
+          id?: string
+          method?: Database["public"]["Enums"]["payment_method"]
+          order_id?: string
+          payment_note?: string | null
+          status?: Database["public"]["Enums"]["payment_status"]
+          transaction_reference?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_payments_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "revision_orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      revision_orders: {
+        Row: {
+          admin_note: string | null
+          amount_npr: number
+          approved_at: string | null
+          completed_at: string | null
+          contact_phone: string | null
+          created_at: string
+          id: string
+          order_token: string
+          personalized_pdf_path: string | null
+          source_pdf_path: string
+          status: Database["public"]["Enums"]["order_status"]
+          student_name: string
+          student_number: string
+          updated_at: string
+        }
+        Insert: {
+          admin_note?: string | null
+          amount_npr?: number
+          approved_at?: string | null
+          completed_at?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          id?: string
+          order_token?: string
+          personalized_pdf_path?: string | null
+          source_pdf_path?: string
+          status?: Database["public"]["Enums"]["order_status"]
+          student_name: string
+          student_number: string
+          updated_at?: string
+        }
+        Update: {
+          admin_note?: string | null
+          amount_npr?: number
+          approved_at?: string | null
+          completed_at?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          id?: string
+          order_token?: string
+          personalized_pdf_path?: string | null
+          source_pdf_path?: string
+          status?: Database["public"]["Enums"]["order_status"]
+          student_name?: string
+          student_number?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      can_download_personalized_pdf: {
+        Args: { _order_id: string }
+        Returns: boolean
+      }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
+      order_status: "pending" | "approved" | "rejected" | "completed"
+      payment_method: "manual"
+      payment_status: "pending" | "submitted" | "verified" | "failed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +279,11 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+      order_status: ["pending", "approved", "rejected", "completed"],
+      payment_method: ["manual"],
+      payment_status: ["pending", "submitted", "verified", "failed"],
+    },
   },
 } as const
